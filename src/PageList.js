@@ -5,12 +5,11 @@ const PageList = (argument = "", home=false) => {
 
   const preparePage = () => {
     const cleanedArgument = argument.replace(/\s+/g, "-");
-
     const displayResults = (articles, isShowMore = false) => {
       const resultsContent = articles.results.map((article) => (
         `<article class="cardGame">
           <div class="cardGame__img__wrapper">
-            <img src="${article.background_image}" alt="illustration for ${article.name}" class="cardGame__img">
+            <img src="${article.background_image ? article.background_image : `./src/no_pic.jpg`}" alt="illustration for ${article.name}" class="cardGame__img">
             <div class="cardGame__img__wrapper--hover">
               <p class="bold">${article.released}</p>
               <p class="bold">${article.rating}/5 - ${article.ratings_count} votes</p>
@@ -31,7 +30,7 @@ const PageList = (argument = "", home=false) => {
         resultsContainer.innerHTML = resultsContent.join("\n");
       }
       // Prevents 'show more' button from displaying if you can already see 3 pages of games
-      if (document.querySelectorAll('.cardGame').length <= 18) {
+      if (document.querySelectorAll('.cardGame').length <= 18 && articles.next !== null) {
         document.querySelector(".page-list .btn").innerHTML = `
           <button class="show-more-btn">Show more</button>
         `
@@ -43,7 +42,7 @@ const PageList = (argument = "", home=false) => {
     };
 
     const fetchList = (url, argument, isShowMore = false) => {
-      const finalURL = argument ? `${url}?search=${argument}` : url;
+      const finalURL = argument ? `${url}&search=${argument}` : url;
       fetch(finalURL)
         .then((response) => response.json())
         .then((responseData) => {
@@ -53,20 +52,34 @@ const PageList = (argument = "", home=false) => {
 
     // Executes the same API query with the next page (can only be called two times before 'show more' button disappears)
     const showMore = (articles) => {
-      document.querySelector('.page-list .btn button').addEventListener('click', function() {
-        fetchList(articles.next, cleanedArgument, true);
-      })
+      if (document.querySelector('.page-list .btn button') !== null)
+      {
+        document.querySelector('.page-list .btn button').addEventListener('click', function() {
+          fetchList(articles.next, cleanedArgument, true);
+        })
+      }
     }
 
     // When choosing a filter (e.g. 'playstation', 'linux'), calls the API with the selected parameter (parent_platforms)
     document.getElementById('mySelect').addEventListener('change', function() {
       // console.log(document.getElementById('mySelect').value)
-      let url = `https://api.rawg.io/api/games?key=8c82a6939d6a4facb72168ab9664784c${document.getElementById('mySelect').value != '' ? '&parent_platforms='+document.getElementById('mySelect').value : ''}&page_size=9&search=`;
+      let searchValue = document.querySelector('.search-input').value.replace(/\s+/g, "-");
+      let url = `https://api.rawg.io/api/games?key=8c82a6939d6a4facb72168ab9664784c${document.getElementById('mySelect').value != '' ? '&parent_platforms='+document.getElementById('mySelect').value : ''}&page_size=9`;
       // console.log(url)
-      fetchList(url, cleanedArgument);
+      fetchList(url, searchValue);
     })
 
-    let url = `https://api.rawg.io/api/games?key=8c82a6939d6a4facb72168ab9664784c${document.getElementById('mySelect').value != '' ? '&parent_platforms='+document.getElementById('mySelect').value : ''}&page_size=9&search=`;
+    // Executes the API with the string specified in text input
+    document.querySelector('.search-input').addEventListener('keypress', e => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        let searchValue = document.querySelector('.search-input').value.replace(/\s+/g, "-");
+        let url = `https://api.rawg.io/api/games?key=8c82a6939d6a4facb72168ab9664784c${document.getElementById('mySelect').value != '' ? '&parent_platforms='+document.getElementById('mySelect').value : ''}&page_size=9`;
+        fetchList(url, searchValue)
+      }
+    })
+
+    let url = `https://api.rawg.io/api/games?key=8c82a6939d6a4facb72168ab9664784c${document.getElementById('mySelect').value != '' ? '&parent_platforms='+document.getElementById('mySelect').value : ''}&page_size=9`;
     fetchList(url, cleanedArgument);
     const cstSel = customSelect(document.getElementById('mySelect'));
   };
