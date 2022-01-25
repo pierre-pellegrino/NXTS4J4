@@ -1,0 +1,17 @@
+.cardGame {
+  &__img {
+    width: 320px;
+    height: 220px;
+    object-fit: cover;
+  }
+
+  h1 {
+    font-size: 1.4em;
+  }
+}
+
+.page-list .articles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+}
