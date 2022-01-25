@@ -6,6 +6,7 @@ import { PageDetail } from './PageDetail';
 import { routes } from './routes';
 
 let pageArgument;
+var filter = "";
 
 const setRoute = () => {
   let path = window.location.hash.substring(1).split("/");

@@ -1,3 +1,6 @@
+import customSelect from 'custom-select';
+import { filter } from "./index"; 
+
 const PageList = (argument = "", home=false) => {
   let icons = ["",`<i class="fab fa-windows"></i>`,`<i class="fab fa-playstation"></i>`,`<i class="fab fa-xbox"></i>`,`<i class="fab fa-app-store-ios"></i>`,`<i class="fab fa-apple"></i>`,`<i class="fab fa-linux"></i>`, `<i class="fab fa-nintendo-switch"></i>`, `<i class="fab fa-android"></i>`]
 
@@ -56,14 +59,28 @@ const PageList = (argument = "", home=false) => {
     }
 
     fetchList("https://api.rawg.io/api/games?key=8c82a6939d6a4facb72168ab9664784c&page_size=9&search=", cleanedArgument);
+    // " + filter != '' ? '&platforms='+filter : '' + "
   };
 
   const render = () => {
     pageContent.innerHTML = `
-      <section class="page-list">
-        <div class="articles">...loading</div>
-        <div class="btn mt-2"></div>
-      </section>
+    <section class="page-list">
+      <div class="filter-input">
+        <select id='mySelect'>
+          <option value>Platform: any</option>
+          <option value="1">Windows</option>
+          <option value="2">PlayStation</option>
+          <option value="3">Xbox</option>
+          <option value="4">iOS</option>
+          <option value="5">Mac</option>
+          <option value="6">Linux</option>
+          <option value="7">Switch</option>
+          <option value="8">Android</option>
+        </select>
+      </div>
+      <div class="articles">...loading</div>
+      <div class="btn mt-2"></div>
+    </section>
     `;
 
     preparePage();
@@ -72,6 +89,19 @@ const PageList = (argument = "", home=false) => {
   const renderHome = () => {
     pageContent.innerHTML += `
       <section class="page-list">
+        <div class="filter-input">
+          <select id='mySelect'>
+            <option value>Platform: any</option>
+            <option value="1">Windows</option>
+            <option value="2">PlayStation</option>
+            <option value="3">Xbox</option>
+            <option value="4">iOS</option>
+            <option value="5">Mac</option>
+            <option value="6">Linux</option>
+            <option value="7">Switch</option>
+            <option value="8">Android</option>
+          </select>
+        </div>
         <div class="articles">...loading</div>
         <div class="btn mt-2"></div>
       </section>
@@ -81,6 +111,10 @@ const PageList = (argument = "", home=false) => {
   };
 
   home ? renderHome() : render();
+  const cstSel = customSelect(document.getElementById('mySelect'));
+  document.getElementById('mySelect').addEventListener('change', function() {
+    filter = document.getElementById('mySelect').value;
+  })
 };
 
 export { PageList };
