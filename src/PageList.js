@@ -1,5 +1,4 @@
 import customSelect from 'custom-select';
-import { filter } from "./index"; 
 
 const PageList = (argument = "", home=false) => {
   let icons = ["",`<i class="fab fa-windows"></i>`,`<i class="fab fa-playstation"></i>`,`<i class="fab fa-xbox"></i>`,`<i class="fab fa-app-store-ios"></i>`,`<i class="fab fa-apple"></i>`,`<i class="fab fa-linux"></i>`, `<i class="fab fa-nintendo-switch"></i>`, `<i class="fab fa-android"></i>`]
@@ -52,14 +51,24 @@ const PageList = (argument = "", home=false) => {
         });
     };
 
+    // Executes the same API query with the next page (can only be called two times before 'show more' button disappears)
     const showMore = (articles) => {
       document.querySelector('.page-list .btn button').addEventListener('click', function() {
         fetchList(articles.next, cleanedArgument, true);
       })
     }
 
-    fetchList("https://api.rawg.io/api/games?key=8c82a6939d6a4facb72168ab9664784c&page_size=9&search=", cleanedArgument);
-    // " + filter != '' ? '&platforms='+filter : '' + "
+    // When choosing a filter (e.g. 'playstation', 'linux'), calls the API with the selected parameter (parent_platforms)
+    document.getElementById('mySelect').addEventListener('change', function() {
+      // console.log(document.getElementById('mySelect').value)
+      let url = `https://api.rawg.io/api/games?key=8c82a6939d6a4facb72168ab9664784c${document.getElementById('mySelect').value != '' ? '&parent_platforms='+document.getElementById('mySelect').value : ''}&page_size=9&search=`;
+      // console.log(url)
+      fetchList(url, cleanedArgument);
+    })
+
+    let url = `https://api.rawg.io/api/games?key=8c82a6939d6a4facb72168ab9664784c${document.getElementById('mySelect').value != '' ? '&parent_platforms='+document.getElementById('mySelect').value : ''}&page_size=9&search=`;
+    fetchList(url, cleanedArgument);
+    const cstSel = customSelect(document.getElementById('mySelect'));
   };
 
   const render = () => {
@@ -111,10 +120,6 @@ const PageList = (argument = "", home=false) => {
   };
 
   home ? renderHome() : render();
-  const cstSel = customSelect(document.getElementById('mySelect'));
-  document.getElementById('mySelect').addEventListener('change', function() {
-    filter = document.getElementById('mySelect').value;
-  })
 };
 
 export { PageList };
