@@ -1,4 +1,5 @@
 import customSelect from 'custom-select';
+import Masonry from 'masonry-layout';
 
 const PageList = (argument = "", home=false) => {
   let icons = ["",`<i class="fab fa-windows"></i>`,`<i class="fab fa-playstation"></i>`,`<i class="fab fa-xbox"></i>`,`<i class="fab fa-app-store-ios"></i>`,`<i class="fab fa-apple"></i>`,`<i class="fab fa-linux"></i>`, `<i class="fab fa-nintendo-switch"></i>`, `<i class="fab fa-android"></i>`]
@@ -39,11 +40,20 @@ const PageList = (argument = "", home=false) => {
         document.querySelector(".page-list .btn").innerHTML = "";
       }
       showMore(articles);
+
+        // Décommenter pour utiliser masonry
+        // var elem = document.querySelector('.articles');
+        // var msnry = new Masonry( elem, {
+        //   // options
+        //   itemSelector: '.cardGame',
+        //   columnWidth: 300,
+        //   gutter: 48
+        // });
     };
 
     const fetchList = (url, argument, isShowMore = false) => {
       const finalURL = argument ? `${url}&search=${argument}` : url;
-      console.log(finalURL)
+      // console.log(finalURL)
       fetch(finalURL)
         .then((response) => response.json())
         .then((responseData) => {
@@ -125,7 +135,7 @@ const PageList = (argument = "", home=false) => {
             <option value="8">Android</option>
           </select>
         </div>
-        <div class="articles">Loading...</div>
+        <div class="articles data-masonry=">Loading...</div>
         <div class="btn mt-2"></div>
       </section>
     `;
@@ -134,6 +144,7 @@ const PageList = (argument = "", home=false) => {
   };
 
   home ? renderHome() : render();
+
 };
 
 export { PageList };

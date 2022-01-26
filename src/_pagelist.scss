@@ -1,5 +1,7 @@
 .cardGame {
   width: 300px;
+  // Décommenter pour utiliser masonry
+  //margin-bottom: 24px;
 
   .small {
     font-size: 0.8em;
@@ -52,6 +54,9 @@
   flex-wrap: wrap;
   gap: 48px 28px;
   justify-content: center;
+  // Décommenter pour utiliser masonry
+  // display: grid;
+  // grid-template-columns: repeat(3,1fr);
 }
 
 .show-more-btn {

@@ -12,7 +12,8 @@
     "build-prod": "webpack --mode production"
   },
   "dependencies": {
-    "custom-select": "^1.1.15"
+    "custom-select": "^1.1.15",
+    "masonry-layout": "^4.2.2"
   },
   "devDependencies": {
     "@babel/core": "^7.16.12",
