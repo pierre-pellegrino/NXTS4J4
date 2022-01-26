@@ -16,7 +16,7 @@ const PageDetail = (argument = "") => {
       articleDOM.querySelector(".rating").innerHTML = `${rating}/5 - ${ratings_count} votes`;
       articleDOM.querySelector("p.description").innerHTML = description;
       articleDOM.querySelector("p.release-date").innerHTML = released;
-      articleDOM.querySelector("p.developer").innerHTML = developers[0].name;
+      articleDOM.querySelector("p.developer").innerHTML = `<a href='#pagelist/&dates=&developers=${developers[0].id}'>${developers[0].name}</a>`;
       articleDOM.querySelector("p.platforms").innerHTML = parent_platforms.map(platform => icons[platform.platform.id]).join('');
       articleDOM.querySelector("p.publisher").innerHTML = publishers[0].name;
       articleDOM.querySelector("p.genre").innerHTML = genres.map(g => g.name);
@@ -40,7 +40,7 @@ const PageDetail = (argument = "") => {
 
   const render = () => {
     pageContent.innerHTML = `
-      <section class="page-detail">
+      <section class="page-detail active">
         <div class="article">
           <div class="page-detail__image mb-1"></div>
           <div class="title-div mb-3">

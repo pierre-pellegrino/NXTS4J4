@@ -38,3 +38,7 @@
   -ms-transform: translateY(-40%);
   -o-transform: translateY(-40%);
 }
+
+nav a:after {
+  background-color: $red;
+}

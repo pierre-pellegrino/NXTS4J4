@@ -21,3 +21,17 @@
     color: $red;
   }
 }
+
+@mixin animFadeIn {
+  animation: fadeIn 1s linear forwards;
+  -webkit-animation: fadeIn 1s linear forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

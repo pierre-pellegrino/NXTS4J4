@@ -76,3 +76,7 @@
     display: none;
   }
 }
+
+.page-detail.active {
+  @include animFadeIn;
+}

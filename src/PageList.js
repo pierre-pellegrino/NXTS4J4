@@ -43,6 +43,7 @@ const PageList = (argument = "", home=false) => {
 
     const fetchList = (url, argument, isShowMore = false) => {
       const finalURL = argument ? `${url}&search=${argument}` : url;
+      // console.log(finalURL)
       fetch(finalURL)
         .then((response) => response.json())
         .then((responseData) => {
@@ -86,7 +87,7 @@ const PageList = (argument = "", home=false) => {
 
   const render = () => {
     pageContent.innerHTML = `
-    <section class="page-list">
+    <section class="page-list active">
       <div class="filter-input">
         <select id='mySelect'>
           <option value>Platform: any</option>
@@ -110,7 +111,7 @@ const PageList = (argument = "", home=false) => {
 
   const renderHome = () => {
     pageContent.innerHTML += `
-      <section class="page-list">
+      <section class="page-list active">
         <div class="filter-input">
           <select id='mySelect'>
             <option value>Platform: any</option>
