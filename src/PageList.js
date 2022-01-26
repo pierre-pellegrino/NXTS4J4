@@ -64,7 +64,7 @@ const PageList = (argument = "", home=false) => {
     document.getElementById('mySelect').addEventListener('change', function() {
       // console.log(document.getElementById('mySelect').value)
       let searchValue = document.querySelector('.search-input').value.replace(/\s+/g, "-");
-      let url = `https://api.rawg.io/api/games?key=8c82a6939d6a4facb72168ab9664784c${document.getElementById('mySelect').value != '' ? '&parent_platforms='+document.getElementById('mySelect').value : ''}&page_size=9`;
+      let url = `https://api.rawg.io/api/games?key=8c82a6939d6a4facb72168ab9664784c${document.getElementById('mySelect').value != '' ? '&parent_platforms='+document.getElementById('mySelect').value : ''}&page_size=9&page_size=9${searchValue != '' ? '' : '&dates=2021-06-01,2022-12-01&ordering=-added'}`;
       // console.log(url)
       fetchList(url, searchValue);
     })
@@ -79,7 +79,7 @@ const PageList = (argument = "", home=false) => {
       }
     })
 
-    let url = `https://api.rawg.io/api/games?key=8c82a6939d6a4facb72168ab9664784c${document.getElementById('mySelect').value != '' ? '&parent_platforms='+document.getElementById('mySelect').value : ''}&page_size=9`;
+    let url = `https://api.rawg.io/api/games?key=8c82a6939d6a4facb72168ab9664784c${document.getElementById('mySelect').value != '' ? '&parent_platforms='+document.getElementById('mySelect').value : ''}&page_size=9&dates=2021-06-01,2022-12-01&ordering=-added`;
     fetchList(url, cleanedArgument);
     const cstSel = customSelect(document.getElementById('mySelect'));
   };
@@ -100,7 +100,7 @@ const PageList = (argument = "", home=false) => {
           <option value="8">Android</option>
         </select>
       </div>
-      <div class="articles">...loading</div>
+      <div class="articles">Loading...</div>
       <div class="btn mt-2"></div>
     </section>
     `;
@@ -124,7 +124,7 @@ const PageList = (argument = "", home=false) => {
             <option value="8">Android</option>
           </select>
         </div>
-        <div class="articles">...loading</div>
+        <div class="articles">Loading...</div>
         <div class="btn mt-2"></div>
       </section>
     `;

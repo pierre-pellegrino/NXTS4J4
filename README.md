@@ -31,3 +31,7 @@ node dist/bundle.js
 ## Credits
 
 Made with [createapp.dev](https://createapp.dev/)
+
+
+#### A changer si motivé
+- Le filtre par console ne se fait pas sur la recherche en cours mais sur le contenu de la searchbar

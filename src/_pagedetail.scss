@@ -1,0 +1,78 @@
+.page-detail {
+  width: 100%;
+  h2 {
+    font-size: 2.3em;
+  }
+
+
+  &__image {
+    width: calc(100% + 96px);
+    margin-left: -48px;
+    position: relative;
+
+    img {
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .btn {
+      @include btn;
+      font-size: 1.2em;
+      position: absolute;
+      bottom: 48px;
+      right: 48px;
+      padding: 12px;
+
+      i {
+        margin-left: 32px;
+      }
+    }
+  }
+
+  .title-div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .rating {
+      font-size: 1.4em;
+    }
+  }
+
+  .description p{
+    margin-bottom: 8px;
+  }
+}
+
+.game-infos {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+
+  .tags {
+    max-width: 40%;
+  }
+}
+
+.screens {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+
+  img {
+    min-width: 350px;
+    width: calc(50% - 16px);
+    max-width: calc(50% - 16px);
+  }
+}
+
+
+.page-detail + .page-list {
+  .show-more-btn {
+    display: none;
+  }
+  .custom-select-container {
+    display: none;
+  }
+}
