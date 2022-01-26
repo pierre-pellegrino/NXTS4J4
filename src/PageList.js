@@ -14,7 +14,7 @@ const PageList = (argument = "", home=false) => {
               <p class="bold">${article.released}</p>
               <p class="bold">${article.rating}/5 - ${article.ratings_count} votes</p>
               <p class="small">
-                ${article.tags.map(tag => " " + tag.name).slice(0,9)}
+                ${article.genres.map(genre => " " + genre.name).slice(0,9)}
               </p>
             </div>
           </div>
@@ -43,7 +43,7 @@ const PageList = (argument = "", home=false) => {
 
     const fetchList = (url, argument, isShowMore = false) => {
       const finalURL = argument ? `${url}&search=${argument}` : url;
-      // console.log(finalURL)
+      console.log(finalURL)
       fetch(finalURL)
         .then((response) => response.json())
         .then((responseData) => {

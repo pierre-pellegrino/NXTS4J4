@@ -19,7 +19,7 @@ const PageDetail = (argument = "") => {
       articleDOM.querySelector("p.developer").innerHTML = `<a href='#pagelist/&dates=&developers=${developers[0].id}'>${developers[0].name}</a>`;
       articleDOM.querySelector("p.platforms").innerHTML = parent_platforms.map(platform => icons[platform.platform.id]).join('');
       articleDOM.querySelector("p.publisher").innerHTML = publishers[0].name;
-      articleDOM.querySelector("p.genre").innerHTML = genres.map(g => g.name);
+      articleDOM.querySelector("p.genre").innerHTML = genres.map(g => `<a href="#pagelist/&dates&genres=${g.name.toLowerCase()}">${g.name}</a>`); 
       articleDOM.querySelector("p.tags").innerHTML = tags.map(t => t.name).slice(0,6);
       articleDOM.querySelector(".stores").innerHTML = stores.map(s => `<p class='mb-1'><a target='_blank' href='https://${s.store.domain}'>${s.store.name}</a></p>`).join('');
       articleDOM.querySelector(".screens").innerHTML = background_image ? `<img class='game-screen' alt='${name} screenshot' src='${background_image}'>` : '';
