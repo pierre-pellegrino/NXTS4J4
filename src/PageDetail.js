@@ -1,6 +1,7 @@
 import { PageList } from "./PageList";
 const PageDetail = (argument = "") => {
   let icons = ["",`<i class="fab fa-windows"></i>`,`<i class="fab fa-playstation"></i>`,`<i class="fab fa-xbox"></i>`,`<i class="fab fa-app-store-ios"></i>`,`<i class="fab fa-apple"></i>`,`<i class="fab fa-linux"></i>`, `<i class="fab fa-nintendo-switch"></i>`, `<i class="fab fa-android"></i>`];
+  let months = ["","Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   const preparePage = () => {
     const cleanedArgument = argument.replace(/\s+/g, "-");
 
@@ -15,7 +16,7 @@ const PageDetail = (argument = "") => {
       articleDOM.querySelector("h1.title").innerHTML = name;
       articleDOM.querySelector(".rating").innerHTML = `${rating}/5 - ${ratings_count} votes`;
       articleDOM.querySelector("p.description").innerHTML = description;
-      articleDOM.querySelector("p.release-date").innerHTML = released;
+      articleDOM.querySelector("p.release-date").innerHTML = `${months[parseInt(released.split('-')[1],10)]} ${released.split('-')[2]}, ${released.split('-')[0]}`;
       articleDOM.querySelector("p.developer").innerHTML = `<a href='#pagelist/&dates=&developers=${developers[0].id}'>${developers[0].name}</a>`;
       articleDOM.querySelector("p.platforms").innerHTML = parent_platforms.map(platform => icons[platform.platform.id]).join('');
       articleDOM.querySelector("p.publisher").innerHTML = `<a href='#pagelist/&dates=&publishers=${publishers[0].id}'>${publishers[0].name}</a>`;

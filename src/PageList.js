@@ -2,7 +2,8 @@ import customSelect from 'custom-select';
 import Masonry from 'masonry-layout';
 
 const PageList = (argument = "", home=false) => {
-  let icons = ["",`<i class="fab fa-windows"></i>`,`<i class="fab fa-playstation"></i>`,`<i class="fab fa-xbox"></i>`,`<i class="fab fa-app-store-ios"></i>`,`<i class="fab fa-apple"></i>`,`<i class="fab fa-linux"></i>`, `<i class="fab fa-nintendo-switch"></i>`, `<i class="fab fa-android"></i>`]
+  let icons = ["",`<i class="fab fa-windows"></i>`,`<i class="fab fa-playstation"></i>`,`<i class="fab fa-xbox"></i>`,`<i class="fab fa-app-store-ios"></i>`,`<i class="fab fa-apple"></i>`,`<i class="fab fa-linux"></i>`, `<i class="fab fa-nintendo-switch"></i>`, `<i class="fab fa-android"></i>`];
+  let months = ["","Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
   const preparePage = () => {
     const cleanedArgument = argument.replace(/\s+/g, "-");
@@ -12,7 +13,7 @@ const PageList = (argument = "", home=false) => {
           <div class="cardGame__img__wrapper">
             <img src="${article.background_image ? article.background_image : `./src/no_pic.jpg`}" alt="illustration for ${article.name}" class="cardGame__img">
             <div class="cardGame__img__wrapper--hover">
-              <p class="bold">${article.released}</p>
+              <p class="bold">${months[parseInt(article.released.split('-')[1],10)]} ${article.released.split('-')[2]}, ${article.released.split('-')[0]}</p>
               <p class="bold">${article.rating}/5 - ${article.ratings_count} votes</p>
               <p class="small">
                 ${article.genres.map(genre => " " + genre.name).slice(0,9)}
