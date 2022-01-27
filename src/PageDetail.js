@@ -26,6 +26,28 @@ const PageDetail = (argument = "") => {
       articleDOM.querySelector(".screens").innerHTML = background_image ? `<img class='game-screen' alt='${name} screenshot' src='${background_image}'>` : '';
       articleDOM.querySelector(".screens").innerHTML += background_image_additional ? `<img class='game-screen' alt='${name} 2nd screenshot' src='${background_image_additional}'>` : '';
       articleDOM.querySelector(".similar").innerHTML = PageList("", true);
+      let arg = argument+"/movies";
+      trailer("https://api.rawg.io/api/games", arg, true);
+      
+    };
+
+    const trailer = (url, argument) => {
+      fetch(`${url}/${argument}?key=8c82a6939d6a4facb72168ab9664784c`)
+        .then((response) => response.json())
+        .then((responseData) => {
+          if (responseData.results.length > 0) {
+            console.log(responseData.results[0].data.max);
+            document.querySelector(".trailer").innerHTML = 
+              `
+              <video width="100%" controls>
+                <source class="trailer" src="${responseData.results[0].data.max}" type="video/mp4">
+              </video>
+              `;
+          }
+          else {
+            document.querySelector(".trailer").innerHTML = `<p>No trailer available yet.</p>`;
+          }
+        });
     };
 
     const fetchGame = (url, argument) => {
@@ -82,6 +104,10 @@ const PageDetail = (argument = "") => {
           <div class="detail-screens mt-4">
             <h2 class="red mb-2">SCREENSHOTS</h2>
             <div class="screens"></div>
+          </div>
+          <div class="trailer-div mt-4">
+            <h2 class="red mb-2">TRAILER</h2>
+            <div class="trailer"></div>
           </div>
           <div class="detail-similar mt-4">
             <h2 class="red mb-2">SIMILAR GAMES</h2>
