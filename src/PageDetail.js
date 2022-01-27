@@ -35,7 +35,6 @@ const PageDetail = (argument = "") => {
           if (responseData.results.length > 0) {
             document.querySelector(elem).innerHTML = "";
             responseData.results.map(scr => {
-              console.log(scr);
               document.querySelector(elem).innerHTML += `
               <img class="game-screen" src="${scr.image}" alt="screenshot n°${scr.id}">
               `;

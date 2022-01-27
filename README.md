@@ -24,7 +24,7 @@ Projet découverte de npm et Webpack.
     - Développeur
     - Éditeur
     - Genre (Aventure, Action...)
-- Affichage d'informations détaillées sur un jeu en cliquant sur son titre
+- Affichage d'informations détaillées sur un jeu en cliquant sur son titre (dont les trailers et captures d'écran)
 - Affichage responsive mobile / tablette / grand écran
 
 
