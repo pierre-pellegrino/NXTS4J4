@@ -16,7 +16,7 @@ const Home = (argument = "") => {
     </p>
   </div>
     `
-  PageList("", true);
+  PageList(argument, true);
 };
 
 export { Home };

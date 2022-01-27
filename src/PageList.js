@@ -1,5 +1,6 @@
 import customSelect from 'custom-select';
 import Masonry from 'masonry-layout';
+import { Home } from './Home';
 
 const PageList = (argument = "", home=false) => {
   let icons = ["",`<i class="fab fa-windows"></i>`,`<i class="fab fa-playstation"></i>`,`<i class="fab fa-xbox"></i>`,`<i class="fab fa-app-store-ios"></i>`,`<i class="fab fa-apple"></i>`,`<i class="fab fa-linux"></i>`, `<i class="fab fa-nintendo-switch"></i>`, `<i class="fab fa-android"></i>`];
@@ -85,7 +86,9 @@ const PageList = (argument = "", home=false) => {
     document.querySelector('.search-input').addEventListener('keypress', e => {
       if (e.key === 'Enter') {
         e.preventDefault();
-        window.location.href = "#pagelist"; //Displays pagelist template instead of current pagedetail
+        if (window.location.hash != "") {       
+          window.location.href = "#pagelist"; //Displays pagelist template instead of current pagedetail
+        }
         let searchValue = document.querySelector('.search-input').value.replace(/\s+/g, "-");
         let url = `https://api.rawg.io/api/games?key=8c82a6939d6a4facb72168ab9664784c${document.getElementById('mySelect').value != '' ? '&parent_platforms='+document.getElementById('mySelect').value : ''}&page_size=9`;
         fetchList(url, searchValue)
