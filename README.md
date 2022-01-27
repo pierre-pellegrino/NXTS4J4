@@ -1,5 +1,7 @@
 
 # The Hyper Progame
+[Essayer le site en live](https://pierre-pellegrino.github.io/Gaming-Website)
+
 
 Site de référencement de jeux vidéo dont je n'ai pas choisi le nom.
 
@@ -20,6 +22,7 @@ Projet découverte de npm et Webpack.
 - Tri des jeux par :
     - Console
     - Développeur
+    - Éditeur
     - Genre (Aventure, Action...)
 - Affichage d'informations détaillées sur un jeu en cliquant sur son titre
 - Affichage responsive mobile / tablette / grand écran

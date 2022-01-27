@@ -18,7 +18,7 @@ const PageDetail = (argument = "") => {
       articleDOM.querySelector("p.release-date").innerHTML = released;
       articleDOM.querySelector("p.developer").innerHTML = `<a href='#pagelist/&dates=&developers=${developers[0].id}'>${developers[0].name}</a>`;
       articleDOM.querySelector("p.platforms").innerHTML = parent_platforms.map(platform => icons[platform.platform.id]).join('');
-      articleDOM.querySelector("p.publisher").innerHTML = publishers[0].name;
+      articleDOM.querySelector("p.publisher").innerHTML = `<a href='#pagelist/&dates=&publishers=${publishers[0].id}'>${publishers[0].name}</a>`;
       articleDOM.querySelector("p.genre").innerHTML = genres.map(g => `<a href="#pagelist/&dates&genres=${g.id}">${g.name}</a>`); 
       articleDOM.querySelector("p.tags").innerHTML = tags.map(t => t.name).slice(0,6);
       articleDOM.querySelector(".stores").innerHTML = stores.map(s => `<p class='mb-1'><a target='_blank' href='https://${s.store.domain}'>${s.store.name}</a></p>`).join('');
