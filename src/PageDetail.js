@@ -16,28 +16,43 @@ const PageDetail = (argument = "") => {
       articleDOM.querySelector("h1.title").innerHTML = name;
       articleDOM.querySelector(".rating").innerHTML = `${rating}/5 - ${ratings_count} votes`;
       articleDOM.querySelector("p.description").innerHTML = description;
-      articleDOM.querySelector("p.release-date").innerHTML = `${months[parseInt(released.split('-')[1],10)]} ${released.split('-')[2]}, ${released.split('-')[0]}`;
+      articleDOM.querySelector("p.release-date").innerHTML = released ? `<p class="bold">${months[parseInt(released.split('-')[1],10)]} ${released.split('-')[2]}, ${released.split('-')[0]}</p>` : "<p> No Information </p>";
       articleDOM.querySelector("p.developer").innerHTML = `<a href='#pagelist/&dates=&developers=${developers[0].id}'>${developers[0].name}</a>`;
       articleDOM.querySelector("p.platforms").innerHTML = parent_platforms.map(platform => icons[platform.platform.id]).join('');
       articleDOM.querySelector("p.publisher").innerHTML = `<a href='#pagelist/&dates=&publishers=${publishers[0].id}'>${publishers[0].name}</a>`;
       articleDOM.querySelector("p.genre").innerHTML = genres.map(g => `<a href="#pagelist/&dates&genres=${g.id}">${g.name}</a>`); 
       articleDOM.querySelector("p.tags").innerHTML = tags.map(t => t.name).slice(0,6);
       articleDOM.querySelector(".stores").innerHTML = stores.map(s => `<p class='mb-1'><a target='_blank' href='https://${s.store.domain}'>${s.store.name}</a></p>`).join('');
-      articleDOM.querySelector(".screens").innerHTML = background_image ? `<img class='game-screen' alt='${name} screenshot' src='${background_image}'>` : '';
-      articleDOM.querySelector(".screens").innerHTML += background_image_additional ? `<img class='game-screen' alt='${name} 2nd screenshot' src='${background_image_additional}'>` : '';
       articleDOM.querySelector(".similar").innerHTML = PageList("", true);
-      let arg = argument+"/movies";
-      trailer("https://api.rawg.io/api/games", arg, true);
-      
+      trailer("https://api.rawg.io/api/games", argument+"/movies", ".trailer");
+      screen("https://api.rawg.io/api/games", argument+"/screenshots", ".screens");      
     };
 
-    const trailer = (url, argument) => {
+    const screen = (url, argument, elem) => {
       fetch(`${url}/${argument}?key=8c82a6939d6a4facb72168ab9664784c`)
         .then((response) => response.json())
         .then((responseData) => {
           if (responseData.results.length > 0) {
-            console.log(responseData.results[0].data.max);
-            document.querySelector(".trailer").innerHTML = 
+            document.querySelector(elem).innerHTML = "";
+            responseData.results.map(scr => {
+              console.log(scr);
+              document.querySelector(elem).innerHTML += `
+              <img class="game-screen" src="${scr.image}" alt="screenshot n°${scr.id}">
+              `;
+            })
+          }
+          else {
+            document.querySelector(elem).innerHTML = `<p>No screenshot available.</p>`;
+          }
+        });
+    };
+
+    const trailer = (url, argument, elem) => {
+      fetch(`${url}/${argument}?key=8c82a6939d6a4facb72168ab9664784c`)
+        .then((response) => response.json())
+        .then((responseData) => {
+          if (responseData.results.length > 0) {
+            document.querySelector(elem).innerHTML = 
               `
               <video width="100%" controls>
                 <source class="trailer" src="${responseData.results[0].data.max}" type="video/mp4">
@@ -45,7 +60,7 @@ const PageDetail = (argument = "") => {
               `;
           }
           else {
-            document.querySelector(".trailer").innerHTML = `<p>No trailer available yet.</p>`;
+            document.querySelector(elem).innerHTML = `<p>No trailer available yet.</p>`;
           }
         });
     };

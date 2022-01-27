@@ -13,7 +13,7 @@ const PageList = (argument = "", home=false) => {
           <div class="cardGame__img__wrapper">
             <img src="${article.background_image ? article.background_image : `./src/no_pic.jpg`}" alt="illustration for ${article.name}" class="cardGame__img">
             <div class="cardGame__img__wrapper--hover">
-              <p class="bold">${months[parseInt(article.released.split('-')[1],10)]} ${article.released.split('-')[2]}, ${article.released.split('-')[0]}</p>
+              ${article.released ? `<p class="bold">${months[parseInt(article.released.split('-')[1],10)]} ${article.released.split('-')[2]}, ${article.released.split('-')[0]}</p>` : "<p> No Information </p>"}
               <p class="bold">${article.rating}/5 - ${article.ratings_count} votes</p>
               <p class="small">
                 ${article.genres.map(genre => " " + genre.name).slice(0,9)}
