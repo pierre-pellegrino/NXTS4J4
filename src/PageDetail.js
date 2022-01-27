@@ -23,7 +23,7 @@ const PageDetail = (argument = "") => {
       articleDOM.querySelector("p.genre").innerHTML = genres.map(g => `<a href="#pagelist/&dates&genres=${g.id}">${g.name}</a>`); 
       articleDOM.querySelector("p.tags").innerHTML = tags.map(t => t.name).slice(0,6);
       articleDOM.querySelector(".stores").innerHTML = stores.map(s => `<p class='mb-1'><a target='_blank' href='https://${s.store.domain}'>${s.store.name}</a></p>`).join('');
-      articleDOM.querySelector(".similar").innerHTML = PageList("", true);
+      articleDOM.querySelector(".similar").innerHTML = PageList("&genres="+genres[Math.floor(Math.random()*genres.length)].id, true);
       trailer("https://api.rawg.io/api/games", argument+"/movies", ".trailer");
       screen("https://api.rawg.io/api/games", argument+"/screenshots", ".screens");      
     };
